@@ -1,0 +1,21 @@
+{
+  "catDir": "cats/",
+  "times": [
+    {
+      "day": "thursday",
+      "start": "18",
+      "end": "22",
+      "dir": "pythons/"
+    }, {
+      "day": "sunday",
+      "start": "14",
+      "end": "19",
+      "dir": "coding101/"
+    }, {
+      "day": "tuesday",
+      "start": "21",
+      "end": "22",
+      "dir": "plenum/"
+    }
+  ]
+}
