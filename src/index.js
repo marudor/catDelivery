@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
   });
   
   var readDir = fs.readdirSync(dir);
-  res.sendFile(dir+'/'+readDir[randomInt(0,readDir.length-1)], {
+  res.sendFile(path.resolve(dir)+'/'+readDir[randomInt(0,readDir.length-1)], {
     headers: {
       'Content-Type': 'image/jpeg'
     }
