@@ -28,7 +28,11 @@ app.get('/', (req, res) => {
   });
   
   dir = fs.readdirSync(dir);
-  res.sendFile(config.catDir+'/'+dir[randomInt(0,dir.length-1)], {}, function (err) {
+  res.sendFile(config.catDir+'/'+dir[randomInt(0,dir.length-1)], {
+    headers: {
+      'Content-Type': 'image/jpeg'
+    }
+  }, function (err) {
     if (err) {
       console.log(err);
       res.status(err.status).end();
