@@ -1,21 +1,21 @@
 {
-  "catDir": "cats/",
+  "catDir": "/home/marudor/subdomains/pictures.marudor.de/katzenBilder/",
   "times": [
     {
       "day": "thursday",
       "start": "18",
       "end": "22",
-      "dir": "pythons/"
+      "dir": "specialCats/pythons/"
     }, {
       "day": "sunday",
-      "start": "14",
+      "start": "15",
       "end": "19",
-      "dir": "coding101/"
+      "dir": "specialCats/coding101/"
     }, {
       "day": "tuesday",
       "start": "21",
       "end": "22",
-      "dir": "plenum/"
+      "dir": "specialCats/plenum/"
     }
   ]
 }
