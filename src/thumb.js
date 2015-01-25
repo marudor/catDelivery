@@ -5,8 +5,6 @@ var easyimg = require('easyimage'),
 
 export function getThumb(fileName, dir) {
   var fPath = path.resolve(dir)+'/thumb/'+fileName;
-  console.log(fPath);
-  console.log(path.resolve(dir)+'/'+fileName);
   if (!fs.existsSync(fPath)) {
     return easyimg.rescrop({
       src: path.resolve(dir)+'/'+fileName,

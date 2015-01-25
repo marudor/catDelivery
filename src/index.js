@@ -59,8 +59,10 @@ app.get('/thumb', (req, res) => {
 
   var readDir = fs.readdirSync(dir);
   var thumb = readDir[randomInt(0,readDir.length-1)];
-  getThumb(thumb, dir).then(() => {
-    console.log('done'); res.sendFile(path.resolve(dir)+'/thumb/'+thumb, {
+  while (thumb.indexOf('.') === -1) {
+    thumb = readDir[randomInt(0,readDir.length-1)];
+  }
+  getThumb(thumb, dir).then(() => { res.sendFile(path.resolve(dir)+'/thumb/'+thumb, {
       headers: {
         'Content-Type': 'image/jpeg'
       }
