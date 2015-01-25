@@ -1,4 +1,4 @@
-import {getThumb} from 'thumb';
+import {getThumb} from './thumb';
 
 const express = require('express'),
       app = express(),
@@ -59,7 +59,7 @@ app.get('/thumb', (req, res) => {
 
   var readDir = fs.readdirSync(dir);
   getThumb(readDir[randomInt(0,readDir.length-1)], dir).then(() => {
-    res.sendFile(path.resolve(dir)+'/thumb/'+readDir[randomInt(0,readDir.length-1)], {
+   console.log('done'); res.sendFile(path.resolve(dir)+'/thumb/'+readDir[randomInt(0,readDir.length-1)], {
       headers: {
         'Content-Type': 'image/jpeg'
       }

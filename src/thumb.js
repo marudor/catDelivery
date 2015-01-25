@@ -1,13 +1,15 @@
 var easyimg = require('easyimage'),
     path = require('path'),
-    Q = require('Q'),
+    Q = require('q'),
     fs = require('fs');
 
 export function getThumb(fileName, dir) {
-  var fPath = path.resolve(dir+'/thumb/'+fileName);
+  var fPath = path.resolve(dir)+'/thumb/'+fileName;
+  console.log(fPath);
+  console.log(path.resolve(dir)+'/'+fileName);
   if (!fs.existsSync(fPath)) {
     return easyimg.rescrop({
-      src: path.resolve(dir+'/'+fileName),
+      src: path.resolve(dir)+'/'+fileName,
       dst: fPath,
       width: 750,
       height: 580
