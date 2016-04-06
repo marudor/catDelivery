@@ -13,7 +13,7 @@ app.listen(61182);
 
 var config = require('./config.json');
 
-cacheRequest.setCacheDirectory(config.cacheDir);
+cachedRequest.setCacheDirectory(config.cacheDir);
 
 function randomInt(min, max) {
   return ~~(Math.random() * (max - min)) + min;
@@ -35,7 +35,7 @@ const getFn = (req, res) => {
 
   var file = picList[randomInt(0,picList.length-1)];
 
-    var x = request({
+    var x = cachedRequest({
       url: 'https://s3.eu-central-1.amazonaws.com/maurudor/' + file,
       ttl: 259200 * 1000
     });
