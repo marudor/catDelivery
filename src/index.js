@@ -6,11 +6,14 @@ const express = require('express'),
       moment = require('moment'),
       _ = require('lodash'),
       path = require('path'),
-      request = require('request');
+      request = require('request'),
+      cachedRequest = require('cached-request')(request);
 
 app.listen(61182);
 
 var config = require('./config.json');
+
+cacheRequest.setCacheDirectory(config.cacheDir);
 
 function randomInt(min, max) {
   return ~~(Math.random() * (max - min)) + min;
@@ -28,11 +31,14 @@ const getFn = (req, res) => {
     }
   });
 
-  var picList = fs.readFileSync('listOfCats', 'utf-8').split('\n').filter(c => c);
+  var picList = fs.readFileSync(config.catFile, 'utf-8').split('\n').filter(c => c);
 
   var file = picList[randomInt(0,picList.length-1)];
 
-    var x = request('https://s3.eu-central-1.amazonaws.com/maurudor/' + file);
+    var x = request({
+      url: 'https://s3.eu-central-1.amazonaws.com/maurudor/' + file,
+      ttl: 259200 * 1000
+    });
     req.pipe(x);
     x.pipe(res);
 };

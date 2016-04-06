@@ -4,6 +4,7 @@
   "description": "",
   "main": "launch.js",
   "dependencies": {
+    "cached-request": "^0.1.4",
     "easyimage": "^1.1.1",
     "express": "^4.11.0",
     "express-request-proxy": "^2.0.0",
