@@ -16,7 +16,7 @@ function randomInt(min, max) {
   return ~~(Math.random() * (max - min)) + min;
 }
 
-app.get('/full', (req, res) => {
+app.get('/', (req, res) => {
   var dir= config.catDir;
   var current = moment();
   var start = moment();
@@ -37,7 +37,8 @@ app.get('/full', (req, res) => {
   }  
   res.sendFile(path.resolve(dir)+'/'+file, {
     headers: {
-      'Content-Type': 'image/jpeg'
+      'Content-Type': 'image/jpeg',
+      'filename': file
     }
   }, function (err) {
     if (err) {
@@ -49,7 +50,7 @@ app.get('/full', (req, res) => {
   });
 });
 
-app.get('/', (req, res) => {
+app.get('/thumb', (req, res) => {
   var dir= config.catDir;
   var current = moment();
   var start = moment();

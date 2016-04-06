@@ -9,8 +9,8 @@ export function getThumb(fileName, dir) {
     return easyimg.rescrop({
       src: path.resolve(dir)+'/'+fileName,
       dst: fPath,
-      width: 750,
-      height: 580
+      width: 300,
+      height: 300
     });
   } else {
     return Q.when(true);

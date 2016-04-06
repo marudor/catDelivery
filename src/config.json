@@ -2,20 +2,15 @@
   "catDir": "/home/marudor/subdomains/pictures.marudor.de/katzenBilder/",
   "times": [
     {
-      "day": "thursday",
-      "start": "18",
-      "end": "22",
-      "dir": "specialCats/pythons/"
-    }, {
-      "day": "sunday",
-      "start": "15",
-      "end": "19",
-      "dir": "specialCats/coding101/"
+      "day": "friday",
+      "start": "19",
+      "end": "21",
+      "dir": "/home/marudor/randomcat/specialCats/einhorn/"
     }, {
       "day": "tuesday",
       "start": "21",
       "end": "22",
-      "dir": "specialCats/plenum/"
+      "dir": "/home/marudor/randomcat/specialCats/plenum/"
     }
   ]
 }
