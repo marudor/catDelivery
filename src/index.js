@@ -5,19 +5,18 @@ const express = require('express'),
       fs = require('fs'),
       moment = require('moment'),
       _ = require('lodash'),
-      path = require('path');
+      path = require('path'),
+      request = require('request');
 
 app.listen(61182);
 
 var config = require('./config.json');
-config.catDir = path.resolve(config.catDir);
 
 function randomInt(min, max) {
   return ~~(Math.random() * (max - min)) + min;
 }
 
-app.get('/', (req, res) => {
-  var dir= config.catDir;
+const getFn = (req, res) => {
   var current = moment();
   var start = moment();
   _.some(config.times, t => {
@@ -29,56 +28,14 @@ app.get('/', (req, res) => {
     }
   });
 
-  var readDir = fs.readdirSync(dir);
- 
-  var file = readDir[randomInt(0,readDir.length-1)];
-  while (file.indexOf('.') === -1) {
-    file = readDir[randomInt(0,readDir.length-1)];
-  }  
-  res.sendFile(path.resolve(dir)+'/'+file, {
-    headers: {
-      'Content-Type': 'image/jpeg',
-      'filename': file
-    }
-  }, function (err) {
-    if (err) {
-      console.log(err);
-      res.status(err.status).end();
-    }
-    else {
-    }
-  });
-});
+  var picList = fs.readFileSync('listOfCats', 'utf-8').split('\n').filter(c => c);
 
-app.get('/thumb', (req, res) => {
-  var dir= config.catDir;
-  var current = moment();
-  var start = moment();
-  _.some(config.times, t => {
-    if (current.day() === start.day(t.day).day()) {
-      if (current.hour() >= start.hour(t.start).hour() && current.hour() <= start.hour(t.end).hour()) {
-        dir = t.dir;
-        return true;
-      }
-    }
-  });
+  var file = picList[randomInt(0,picList.length-1)];
 
-  var readDir = fs.readdirSync(dir);
-  var thumb = readDir[randomInt(0,readDir.length-1)];
-  while (thumb.indexOf('.') === -1) {
-    thumb = readDir[randomInt(0,readDir.length-1)];
-  }
-  getThumb(thumb, dir).then(() => { res.sendFile(path.resolve(dir)+'/thumb/'+thumb, {
-      headers: {
-        'Content-Type': 'image/jpeg'
-      }
-    }, function (err) {
-      if (err) {
-        console.log(err);
-        res.status(err.status).end();
-      }
-      else {
-      }
-    });
-  });
-});
+    var x = request('https://s3.eu-central-1.amazonaws.com/maurudor/' + file);
+    req.pipe(x);
+    x.pipe(res);
+};
+app.get('/', getFn);
+
+app.get('/thumb', getFn);
