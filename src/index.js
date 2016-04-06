@@ -39,6 +39,7 @@ const getFn = (req, res) => {
       url: 'https://s3.eu-central-1.amazonaws.com/maurudor/' + file,
       ttl: 259200 * 1000
     });
+    res.set('Content-Type', 'image/jpeg');
     req.pipe(x);
     x.pipe(res);
 };
